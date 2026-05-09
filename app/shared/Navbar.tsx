@@ -28,7 +28,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="w-full h-16 fixed z-10 top-0 text-black bg-white shadow-md">
+    <nav className="w-full h-16 fixed z-20 top-0 text-black bg-white shadow-md">
       <div className="h-full flex items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Left Section*/}
         <div className="flex items-center gap-2">
@@ -103,7 +103,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/login"
+            href="/pages/Login"
             className="hidden sm:block text-sm font-medium border border-blue-500 px-4 py-2 rounded-full hover:bg-blue-50 transition-colors"
           >
             Login
