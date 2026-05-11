@@ -85,10 +85,12 @@ const Page = () => {
                           ${watch.price.toLocaleString()}
                         </span>
                       </div>
-                      <button className="border mt-2 w-full text-[#2573E6] font-semibold py-2 sm:py-2 px-2 sm:px-2 rounded-lg text-sm sm:text-base active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg">
-                        <FaShoppingCart className="text-base sm:text-lg" />
-                        Add to Cart
-                      </button>
+                      <Link href={`/pages/ProductDetailsPage?id=${watch.id}&type=watches`}>
+                        <button className="border mt-2 w-full text-[#2573E6] font-semibold py-2 sm:py-2 px-2 sm:px-2 rounded-lg text-sm sm:text-base active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg">
+                          <FaShoppingCart className="text-base sm:text-lg" />
+                          Add to Cart
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 ))}

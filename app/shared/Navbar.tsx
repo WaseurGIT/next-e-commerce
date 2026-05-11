@@ -28,7 +28,6 @@ const Navbar = () => {
             )}
           </button>
 
-          {/* Logo */}
           <Link
             className="text-xl sm:text-2xl font-bold flex-shrink-0"
             href="/"
@@ -36,19 +35,6 @@ const Navbar = () => {
             LUXURA
           </Link>
         </div>
-
-        {/* Navigation links */}
-        {/* <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
-          {navlinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.path}
-              className="text-sm font-medium hover:text-blue-600 transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div> */}
 
         {/* Right Side Actions */}
         <div className="flex items-center">
@@ -113,16 +99,6 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden border-t bg-white shadow-lg">
           <div className="px-4 py-4 space-y-3">
-            {/* {navlinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className="block text-sm font-medium text-gray-700 hover:text-blue-600 py-2 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))} */}
             <Link
               href="/login"
               className="block text-sm font-medium border border-blue-500 px-4 py-2 rounded-full hover:bg-blue-50 transition-colors text-center mt-4"
