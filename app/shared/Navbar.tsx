@@ -113,7 +113,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden border-t bg-white shadow-lg">
           <div className="px-4 py-4 space-y-3">
-            {navlinks.map((link) => (
+            {/* {navlinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.path}
@@ -122,7 +122,7 @@ const Navbar = () => {
               >
                 {link.name}
               </Link>
-            ))}
+            ))} */}
             <Link
               href="/login"
               className="block text-sm font-medium border border-blue-500 px-4 py-2 rounded-full hover:bg-blue-50 transition-colors text-center mt-4"
