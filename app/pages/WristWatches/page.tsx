@@ -6,9 +6,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
+import { getWatches } from "@/app/api/productsApi";
 
 interface Watch {
-  id: number;
+  _id: string;
   name: string;
   price: number;
   image: string;
@@ -22,8 +23,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/watches.json");
-        const data = await response.json();
+        const data = await getWatches();
         setWatches(data);
       } catch (error) {
         console.error("Error fetching watches:", error);
@@ -63,7 +63,7 @@ const Page = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {watches.map((watch) => (
                   <div
-                    key={watch.id}
+                    key={watch._id}
                     className="group bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-200"
                   >
                     <div className="relative rounded-t-xl sm:rounded-t-2xl w-full h-48 sm:h-72 md:h-80 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
@@ -85,7 +85,7 @@ const Page = () => {
                           ${watch.price.toLocaleString()}
                         </span>
                       </div>
-                      <Link href={`/pages/ProductDetailsPage?id=${watch.id}&type=watches`}>
+                      <Link href={`/pages/ProductDetailsPage?id=${watch._id}&type=watches`}>
                         <button className="border mt-2 w-full text-[#2573E6] font-semibold py-2 sm:py-2 px-2 sm:px-2 rounded-lg text-sm sm:text-base active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg">
                           <FaShoppingCart className="text-base sm:text-lg" />
                           Add to Cart
