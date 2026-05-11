@@ -68,9 +68,9 @@ const Navbar = () => {
             className="p-2 hover:bg-gray-100 rounded-full transition-colors relative flex items-center justify-center"
           >
             <SlBag className="text-gray-700 text-lg sm:text-xl" />
-            <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold">
+            {/* <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold">
               0
-            </span>
+            </span> */}
           </Link>
 
           <Link

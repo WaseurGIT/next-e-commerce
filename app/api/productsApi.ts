@@ -64,4 +64,35 @@ const getClocksById = async (id: string) => {
   }
 };
 
-export { getWatches, getWatchesById, getFans, getFansById, getClocks, getClocksById };
+const getTrendings = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/trendings");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching trending products:", error);
+    throw error;
+  }
+};
+
+const getTrendingById = async (id: string) => {
+  try {
+    const response = await fetch(`http://localhost:5000/trendings/${id}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching trending product by ID:", error);
+    throw error;
+  }
+};
+
+export {
+  getWatches,
+  getWatchesById,
+  getFans,
+  getFansById,
+  getClocks,
+  getClocksById,
+  getTrendings,
+  getTrendingById,
+};

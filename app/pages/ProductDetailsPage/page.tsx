@@ -6,7 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
-import { getFans, getWatches, getClocks } from "@/app/api/productsApi";
+import {
+  getFans,
+  getWatches,
+  getClocks,
+  getTrendings,
+} from "@/app/api/productsApi";
 import axios from "axios";
 
 interface Product {
@@ -46,6 +51,9 @@ const Page = () => {
             break;
           case "fans":
             dataFile = getFans();
+            break;
+          case "trendings":
+            dataFile = getTrendings();
             break;
           default:
             dataFile = getWatches();
