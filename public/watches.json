@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "Vanguard Chronograph",
+        "price": 2450,
+        "image": "/images/watch_7.png",
+        "rating": 4.5
+    },
+    {
+        "id": 2,
+        "name": "Legacy Gold Skeleton",
+        "price": 8200,
+        "image": "/images/watch_8.png",
+        "rating": 4.5
+    },
+    {
+        "id": 3,
+        "name": "Deep Sea Professional",
+        "price": 2450,
+        "image": "/images/watch_9.png",
+        "rating": 5.0
+    },
+    {
+        "id": 4,
+        "name": "Luxury Sapphire Chronograph",
+        "price": 299,
+        "image": "/images/watch_11.png",
+        "rating": 5.0
+    },
+    {
+        "id": 5,
+        "name": "Classic Onyx Watch",
+        "price": 210,
+        "image": "/images/watch_12.png",
+        "rating": 5.0
+    },
+    {
+        "id": 6,
+        "name": "Silver Mesh Slim",
+        "price": 165,
+        "image": "/images/watch_13.png",
+        "rating": 5.0
+    },
+    {
+        "id": 7,
+        "name": "Aviator Terra",
+        "price": 345,
+        "image": "/images/watch_14.png",
+        "rating": 5.0
+    }
+
+]

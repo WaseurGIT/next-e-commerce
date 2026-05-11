@@ -12,21 +12,6 @@ const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navlinks = [
-    {
-      name: "Watches",
-      path: "/",
-    },
-    {
-      name: "Fans",
-      path: "/",
-    },
-    {
-      name: "Umbrellas",
-      path: "/",
-    },
-  ];
-
   return (
     <nav className="w-full h-16 fixed z-20 top-0 text-black bg-white shadow-md">
       <div className="h-full flex items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -53,7 +38,7 @@ const Navbar = () => {
         </div>
 
         {/* Navigation links */}
-        <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
+        {/* <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
           {navlinks.map((link) => (
             <Link
               key={link.name}
@@ -63,7 +48,7 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-        </div>
+        </div> */}
 
         {/* Right Side Actions */}
         <div className="flex items-center">
