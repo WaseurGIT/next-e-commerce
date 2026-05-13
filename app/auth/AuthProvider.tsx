@@ -1,30 +1,36 @@
 "use client";
 
-import axios from "axios";
 import React, { createContext, useEffect, useState, useContext } from "react";
 import axiosSecure from "./axiosSecure";
+import { useRouter } from "next/navigation";
 
 interface User {
   _id: string;
   name: string;
   email: string;
-  role: string;
+  role: "user" | "admin";
   profilePicture: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (name: string, email: string, password: string) => Promise<boolean>;
+  isAuthenticated: boolean;
+  isAdmin: boolean;
+  login: (email: string, password: string) => Promise<User | null>;
+  register: (
+    name: string,
+    email: string,
+    password: string,
+  ) => Promise<User | null>;
   logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
-// axios.defaults.withCredentials = true;
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -34,9 +40,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         withCredentials: true,
       });
       setUser(res.data);
+      return res.data;
     } catch (error) {
       setUser(null);
-      console.error("fetch user error", error);
+      return null;
     } finally {
       setLoading(false);
     }
@@ -56,13 +63,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       if (res.data.success) {
-        await fetchUser();
-        return true;
+        return await fetchUser();
       }
-      return false;
+      return null;
     } catch (error) {
       console.error("login error", error);
-      return false;
+      return null;
     }
   };
 
@@ -75,23 +81,37 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       if (res.data.success) {
-        await fetchUser();
-        return true;
+        setUser(res.data.user);
+        return res.data.user;
       }
-      return false;
+      return null;
     } catch (error) {
       console.error("register error", error);
-      return false;
+      return null;
     }
   };
 
   const logout = async () => {
     await axiosSecure.post("/logout");
     setUser(null);
+    router.push("/");
   };
 
+  const isAuthenticated = !!user;
+  const isAdmin = user?.role === "admin";
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        register,
+        logout,
+        isAuthenticated,
+        isAdmin,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

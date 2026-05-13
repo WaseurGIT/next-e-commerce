@@ -24,9 +24,10 @@ const Page = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const success = await login(email, password);
+    const loggedUser = await login(email, password);
     setIsLoading(false);
-    if (success) {
+
+    if (loggedUser) {
       await Swal.fire({
         icon: "success",
         title: "Login Successful",
@@ -34,7 +35,11 @@ const Page = () => {
         timer: 1500,
         showConfirmButton: false,
       });
-      router.push("/");
+      if (loggedUser.role === "admin") {
+        router.push("/admin/dashboard");
+      } else {
+        router.push("/user/dashboard");
+      }
     } else {
       Swal.fire({
         icon: "error",

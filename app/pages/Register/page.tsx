@@ -41,7 +41,8 @@ const Page = () => {
       setIsLoading(true);
 
       const success = await register(fullName, email, password);
-      console.log("Registration success:", fullName, email, password, success);
+      // console.log("Registration success:", fullName, email, password, success);
+      
       setIsLoading(false);
       if (success) {
         await Swal.fire({

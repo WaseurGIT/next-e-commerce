@@ -39,6 +39,19 @@ next-e-commerce/
 │   │   ├── Subscribe.tsx               # Newsletter subscription section
 │   │   └── Trending.tsx                # Trending products section
 │   │
+│   ├── 📁 api/                         # API routes
+│   │   └── productsApi.ts              # Products API integration
+│   │
+│   ├── 📁 auth/                        # Authentication
+│   │   ├── AuthProvider.tsx            # Auth context provider
+│   │   └── axiosSecure.ts              # Secure axios instance
+│   │
+│   ├── 📁 admin/                       # Admin panel
+│   │   └── dashboard.tsx               # Admin dashboard
+│   │
+│   ├── 📁 user/                        # User pages
+│   │   └── dashboard.tsx               # User dashboard
+│   │
 │   └── 📁 pages/                       # Product and feature pages
 │       ├── 📁 WristWatches/
 │       │   └── page.tsx                # Wrist watches listing (4-col grid, watches.json)
@@ -49,18 +62,17 @@ next-e-commerce/
 │       ├── 📁 Fans/
 │       │   └── page.tsx                # Table fans listing (4-col grid, fans.json)
 │       │
+│       ├── 📁 CartPage/
+│       │   └── page.tsx                # Shopping cart page
+│       │
 │       ├── 📁 ProductDetailsPage/
 │       │   └── page.tsx                # Product details page (query: id, type)
 │       │
 │       ├── 📁 Login/
 │       │   └── page.tsx                # Login page with email & social auth
 │       │
-│       ├── 📁 Register/
-│       │   └── page.tsx                # Registration page with validation
-│       │
-│       ├── 📁 admin/                   # Admin panel (placeholder - TBD)
-│       ├── 📁 auth/                    # Auth pages (placeholder - TBD)
-│       └── 📁 client/                  # Client pages (placeholder - TBD)
+│       └── 📁 Register/
+│           └── page.tsx                # Registration page with validation
 │
 ├── 📁 public/                          # Static assets directory
 │   ├── watches.json                    # Watch products data
@@ -98,7 +110,10 @@ KEY FEATURES:
 ─────────────
 ✓ Multiple product categories (Watches, Clocks, Fans)
 ✓ Detailed product pages with images, pricing, ratings
+✓ Shopping cart functionality
 ✓ Mobile-first responsive design using Tailwind CSS
+✓ Authentication with secure API integration
+✓ Admin and user dashboards
 ✓ Login and Registration authentication pages
 ✓ Fixed navigation bar with search, user menu, and cart
 ✓ Comprehensive footer with links and social media
@@ -119,9 +134,12 @@ ROUTES:
 /pages/WristWatches         Wrist watches listing
 /pages/LuxuryClocks         Luxury clocks listing
 /pages/Fans                 Table fans listing
+/pages/CartPage             Shopping cart
 /pages/ProductDetailsPage   Product details (query: id, type)
 /pages/Login                Login page
 /pages/Register             Registration page
+/admin                      Admin dashboard
+/user                       User dashboard
 
 SCRIPTS:
 ────────
@@ -138,8 +156,12 @@ DEVELOPER NOTES:
 4. Tailwind CSS is used for styling with responsive breakpoints
 5. React Icons used throughout for UI icons
 6. Product data stored in JSON files in public directory
-7. Admin, Auth, and Client sections are placeholders for future development
-8. Image optimization via Next.js Image component
+7. Authentication handled via AuthProvider.tsx context
+8. Secure API calls use axiosSecure.ts with auth interceptors
+9. Admin dashboard available at /admin
+10. User dashboard available at /user
+11. Shopping cart functionality available at /CartPage
+12. Image optimization via Next.js Image component
 `;
 
 module.exports = projectStructure;
