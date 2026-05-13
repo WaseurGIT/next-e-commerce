@@ -6,17 +6,44 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { TbBrightness2 } from "react-icons/tb";
 import { FaGlobeAmericas } from "react-icons/fa";
+import { useAuth } from "@/app/auth/AuthProvider";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const Page = () => {
+  const { login } = useAuth();
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
+
+    const success = await login(email, password);
+    setIsLoading(false);
+    if (success) {
+      await Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "Redirecting...",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+      router.push("/");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: "Invalid email or password",
+        confirmButtonColor: "#dc2626",
+      });
+      setError("Invalid email or password");
+    }
   };
 
   return (
@@ -45,11 +72,15 @@ const Page = () => {
             <div className="fixed bottom-6 left-6">
               <div className="flex items-center gap-2 mb-2">
                 <TbBrightness2 className="text-sm text-[#ADC6FF]" />
-                <p className="text-xs text-[#ADC6FF]">Guaranteed Authenticity</p>
+                <p className="text-xs text-[#ADC6FF]">
+                  Guaranteed Authenticity
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <FaGlobeAmericas className="text-sm text-[#ADC6FF]" />
-                <p className="text-xs text-[#ADC6FF]">Global Concierge Support</p>
+                <p className="text-xs text-[#ADC6FF]">
+                  Global Concierge Support
+                </p>
               </div>
             </div>
           </div>
@@ -69,6 +100,10 @@ const Page = () => {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-3">
+              <div>
+                {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
+              </div>
+
               <div>
                 <label className="text-gray-700 font-semibold text-sm">
                   Email
@@ -119,7 +154,6 @@ const Page = () => {
                 </Link>
               </div>
 
-              {/* Button */}
               <button
                 type="submit"
                 disabled={isLoading}
