@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 const Page = () => {
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -53,7 +53,6 @@ const Page = () => {
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      {/* Main Container */}
       <div className="w-full h-full grid md:grid-cols-2 overflow-hidden">
         {/* Left - Image */}
         <div className="relative hidden md:flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-800 to-slate-900">
@@ -108,7 +107,6 @@ const Page = () => {
               <div>
                 {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
               </div>
-
               <div>
                 <label className="text-gray-700 font-semibold text-sm">
                   Email
@@ -168,7 +166,6 @@ const Page = () => {
               </button>
             </form>
 
-            {/* Divider */}
             <div className="my-6 flex items-center gap-4">
               <div className="flex-1 h-px bg-gray-300"></div>
               <span className="text-gray-500 text-sm">or</span>
@@ -178,14 +175,20 @@ const Page = () => {
             {/* Google Login Button */}
             <button
               type="button"
-              onClick={() => console.log("Google login clicked")}
+              onClick={async () => {
+                const user = await googleLogin();
+                if (user?.role === "admin") {
+                  router.push("/admin/dashboard");
+                } else {
+                  router.push("/user/dashboard");
+                }
+              }}
               className="w-full flex items-center justify-center gap-3 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-3 rounded-lg transition-all hover:bg-gray-50"
             >
               <FcGoogle className="text-2xl" />
               <span>Login with Google</span>
             </button>
 
-            {/* Footer */}
             <p className="text-center text-gray-600 mt-6 text-sm">
               Don’t have an account?{" "}
               <Link href="/pages/Register" className="text-blue-600 font-bold">

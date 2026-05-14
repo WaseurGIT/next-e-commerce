@@ -3,6 +3,8 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import axiosSecure from "./axiosSecure";
 import { useRouter } from "next/navigation";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 interface User {
   _id: string;
@@ -25,9 +27,11 @@ interface AuthContextType {
     password: string,
   ) => Promise<User | null>;
   logout: () => Promise<void>;
+  googleLogin: () => Promise<User | null>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -97,6 +101,29 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     router.push("/");
   };
 
+  const googleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const firebaseUser = result.user;
+      const userInfo = {
+        name: firebaseUser.displayName,
+        email: firebaseUser.email,
+      };
+
+      const res = await axiosSecure.post("/google-login", userInfo, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        return await fetchUser();
+      }
+      return null;
+    } catch (error) {
+      console.error("Google login error", error);
+      return null;
+    }
+  };
+
   const isAuthenticated = !!user;
   const isAdmin = user?.role === "admin";
 
@@ -108,6 +135,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         login,
         register,
         logout,
+        googleLogin,
         isAuthenticated,
         isAdmin,
       }}
