@@ -2,7 +2,7 @@ import React from 'react';
 
 const page = () => {
     return (
-        <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <div className="w-full h-screen flex items-center justify-center">
             <h1>Admin Dashboard</h1>
         </div>
     );

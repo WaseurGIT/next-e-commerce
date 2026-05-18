@@ -61,7 +61,9 @@ const Navbar = () => {
           {user ? (
             <>
               <Link
-                href="/account"
+                href={
+                  user.role === "admin" ? "/admin/dashboard" : "/user/dashboard"
+                }
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors flex items-center justify-center"
                 title={`Welcome, ${user.name}`}
               >

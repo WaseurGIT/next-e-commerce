@@ -2,166 +2,130 @@
  * NEXT E-COMMERCE PROJECT STRUCTURE
  * ===================================
  * 
- * A Next.js 16 e-commerce application with multiple product categories,
+ * A Next.js e-commerce application with multiple product categories,
  * authentication, and product details pages.
+ * 
+ * Last Updated: May 18, 2026
  */
 
 const projectStructure = `
 next-e-commerce/
 │
-├── 📄 Configuration Files
-│   ├── package.json                    # Project dependencies and scripts
-│   ├── next.config.ts                  # Next.js configuration
-│   ├── tsconfig.json                   # TypeScript configuration
-│   ├── eslint.config.mjs               # ESLint configuration
-│   ├── postcss.config.mjs              # PostCSS configuration
-│   ├── tailwind.config.js              # Tailwind CSS configuration
-│   ├── next-env.d.ts                   # Next.js type definitions
-│   ├── README.md                       # Project documentation
+├── 📄 Root Configuration Files
 │   ├── AGENTS.md                       # Agent configuration
 │   ├── CLAUDE.md                       # Claude configuration
-│   └── structure.js                    # This file - Project structure overview
+│   ├── eslint.config.mjs               # ESLint configuration
+│   ├── next-env.d.ts                   # Next.js type definitions
+│   ├── next.config.ts                  # Next.js configuration
+│   ├── package.json                    # Project dependencies and scripts
+│   ├── package-lock.json               # Locked dependencies
+│   ├── postcss.config.mjs              # PostCSS configuration
+│   ├── README.md                       # Project documentation
+│   ├── structure.js                    # This file - Current project structure
+│   ├── tsconfig.json                   # TypeScript configuration
+│   └── .env                            # Environment variables
+│
+├── 📁 .git/                            # Git repository
+├── 📁 .gitignore                       # Git ignore rules
+├── 📁 .next/                           # Next.js build output
+├── 📁 node_modules/                    # Project dependencies
 │
 ├── 📁 app/                             # Main Next.js App Router Directory
-│   ├── layout.tsx                      # Root layout with Navbar and Footer
-│   ├── page.tsx                        # Home page - main landing page
-│   ├── globals.css                     # Global CSS styles and Tailwind imports
+│   ├── 📁 (dashboard)/                 # Dashboard route group
+│   │   ├── layout.tsx                  # Dashboard layout
+│   │   ├── 📁 admin/
+│   │   │   └── 📁 dashboard/
+│   │   │       └── page.tsx            # Admin dashboard
+│   │   └── 📁 user/
+│   │       └── 📁 dashboard/
+│   │           └── page.tsx            # User dashboard
 │   │
-│   ├── 📁 shared/                      # Reusable layout components
-│   │   ├── Navbar.tsx                  # Navigation bar component
-│   │   └── Footer.tsx                  # Footer component
+│   ├── 📁 (public)/                    # Public route group
+│   │   ├── layout.tsx                  # Public layout
+│   │   ├── page.tsx                    # Public home page
+│   │   └── 📁 pages/                   # Product and feature pages
+│   │       ├── 📁 CartPage/
+│   │       │   └── page.tsx
+│   │       ├── 📁 Fans/
+│   │       │   └── page.tsx
+│   │       ├── 📁 Login/
+│   │       │   └── page.tsx
+│   │       ├── 📁 LuxuryClocks/
+│   │       │   └── page.tsx
+│   │       ├── 📁 ProductDetailsPage/
+│   │       │   └── page.tsx
+│   │       ├── 📁 Register/
+│   │       │   └── page.tsx
+│   │       └── 📁 WristWatches/
+│   │           └── page.tsx
 │   │
-│   ├── 📁 components/                  # Home page section components
-│   │   ├── Banner.tsx                  # Hero banner section
-│   │   ├── MidNightCollection.tsx      # Midnight collection showcase
-│   │   ├── Service.tsx                 # Services information section
-│   │   ├── ShopCategoris.tsx           # Shop categories section
-│   │   ├── Subscribe.tsx               # Newsletter subscription section
-│   │   └── Trending.tsx                # Trending products section
-│   │
-│   ├── 📁 api/                         # API routes
-│   │   └── productsApi.ts              # Products API integration
+│   ├── 📁 api/                         # API integration
+│   │   └── productsApi.ts              # Products API
 │   │
 │   ├── 📁 auth/                        # Authentication
 │   │   ├── AuthProvider.tsx            # Auth context provider
 │   │   └── axiosSecure.ts              # Secure axios instance
 │   │
-│   ├── 📁 admin/                       # Admin panel
-│   │   └── dashboard.tsx               # Admin dashboard
+│   ├── 📁 components/                  # Reusable components
+│   │   ├── Banner.tsx
+│   │   ├── MidNightCollection.tsx
+│   │   ├── Service.tsx
+│   │   ├── ShopCategoris.tsx
+│   │   ├── Subscribe.tsx
+│   │   └── Trending.tsx
 │   │
-│   ├── 📁 user/                        # User pages
-│   │   └── dashboard.tsx               # User dashboard
+│   ├── 📁 firebase/                    # Firebase configuration
+│   │   └── firebase.config.ts
 │   │
-│   └── 📁 pages/                       # Product and feature pages
-│       ├── 📁 WristWatches/
-│       │   └── page.tsx                # Wrist watches listing (4-col grid, watches.json)
-│       │
-│       ├── 📁 LuxuryClocks/
-│       │   └── page.tsx                # Luxury clocks listing (4-col grid, clocks.json)
-│       │
-│       ├── 📁 Fans/
-│       │   └── page.tsx                # Table fans listing (4-col grid, fans.json)
-│       │
-│       ├── 📁 CartPage/
-│       │   └── page.tsx                # Shopping cart page
-│       │
-│       ├── 📁 ProductDetailsPage/
-│       │   └── page.tsx                # Product details page (query: id, type)
-│       │
-│       ├── 📁 Login/
-│       │   └── page.tsx                # Login page with email & social auth
-│       │
-│       └── 📁 Register/
-│           └── page.tsx                # Registration page with validation
+│   ├── 📁 shared/                      # Shared layout components
+│   │   ├── Footer.tsx
+│   │   ├── Navbar.tsx
+│   │   └── favicon.ico
+│   │
+│   ├── globals.css                     # Global CSS styles
+│   ├── layout.tsx                      # Root layout
+│   └── page.tsx                        # Home page
 │
-├── 📁 public/                          # Static assets directory
-│   ├── watches.json                    # Watch products data
-│   ├── clocks.json                     # Clock products data
-│   ├── fans.json                       # Fan products data
-│   │
-│   └── 📁 images/                      # Product and UI images
-│       ├── watch_1.png through watch_9.png
-│       ├── clock_1.png through clock_n.png
-│       ├── fan_1.png through fan_n.png
-│       ├── umbrella_1.png through umbrella_n.png
-│       └── login.png and other UI images
-│
-└── 📦 Dependencies
-    ├── Runtime:
-    │   ├── next@16.2.6
-    │   ├── react@19.2.4
-    │   ├── react-dom@19.2.4
-    │   ├── react-icons@^5.6.0
-    │   └── lucide-react@^1.14.0
-    │
-    └── DevDependencies:
-        ├── typescript@^5
-        ├── tailwindcss@^4
-        ├── @tailwindcss/postcss@^4
-        ├── eslint@^9
-        ├── eslint-config-next@16.2.6
-        ├── @types/node@^20
-        ├── @types/react@^19
-        └── @types/react-dom@^19
+└── 📦 Key Directories
+    ├── app/                            # Next.js app router
+    └── public/                         # Static files
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-KEY FEATURES:
-─────────────
-✓ Multiple product categories (Watches, Clocks, Fans)
-✓ Detailed product pages with images, pricing, ratings
-✓ Shopping cart functionality
-✓ Mobile-first responsive design using Tailwind CSS
-✓ Authentication with secure API integration
-✓ Admin and user dashboards
-✓ Login and Registration authentication pages
-✓ Fixed navigation bar with search, user menu, and cart
-✓ Comprehensive footer with links and social media
-✓ Optimized images using Next.js Image component
+CURRENT STRUCTURE SUMMARY:
+──────────────────────────
+✓ Root configuration files & environment setup (14 items)
+✓ Git & build directories (.git, .next, node_modules)
+✓ Main app directory with root layout and page
+✓ Route groups: (dashboard) and (public)
+✓ Admin section with dashboard
+✓ User section with dashboard
+✓ Public pages section with 7 product categories
+✓ API integration for products
+✓ Authentication system (AuthProvider, axiosSecure)
+✓ Reusable components (6 components)
+✓ Firebase configuration
+✓ Shared layout components (Navbar, Footer, favicon)
+✓ Public assets directory with images
+✓ Global CSS styles
 
-DESIGN SYSTEM:
-──────────────
-• Primary Color: #2573E6 (Blue)
-• Secondary: blue-600
-• Background: Gradient (slate-50 via-blue-50 to-indigo-50)
-• Max Width: max-w-7xl
-• Padding: px-4 sm:px-6 lg:px-8
-• Gap: gap-6
-
-ROUTES:
-───────
-/                           Home page
-/pages/WristWatches         Wrist watches listing
-/pages/LuxuryClocks         Luxury clocks listing
-/pages/Fans                 Table fans listing
-/pages/CartPage             Shopping cart
-/pages/ProductDetailsPage   Product details (query: id, type)
-/pages/Login                Login page
-/pages/Register             Registration page
-/admin                      Admin dashboard
-/user                       User dashboard
-
-SCRIPTS:
-────────
-npm run dev                 Start development server (port 3000)
-npm run build               Create production build
-npm run start               Start production server
-npm run lint               Run ESLint
-
-DEVELOPER NOTES:
-────────────────
-1. Product pages use responsive grids: 1 col mobile → 2 col tablet → 4 col desktop
-2. Product details fetches data dynamically via query parameters
-3. All product pages use "use client" for client-side interactivity
-4. Tailwind CSS is used for styling with responsive breakpoints
-5. React Icons used throughout for UI icons
-6. Product data stored in JSON files in public directory
-7. Authentication handled via AuthProvider.tsx context
-8. Secure API calls use axiosSecure.ts with auth interceptors
-9. Admin dashboard available at /admin
-10. User dashboard available at /user
-11. Shopping cart functionality available at /CartPage
-12. Image optimization via Next.js Image component
+FOLDER HIERARCHY:
+─────────────────
+• app/(dashboard)/admin/dashboard/
+• app/(dashboard)/user/dashboard/
+• app/(public)/pages/CartPage/
+• app/(public)/pages/Fans/
+• app/(public)/pages/Login/
+• app/(public)/pages/LuxuryClocks/
+• app/(public)/pages/ProductDetailsPage/
+• app/(public)/pages/Register/
+• app/(public)/pages/WristWatches/
+• app/api/
+• app/auth/
+• app/components/
+• app/firebase/
+• app/shared/
+• public/images/
 `;
 
 module.exports = projectStructure;
