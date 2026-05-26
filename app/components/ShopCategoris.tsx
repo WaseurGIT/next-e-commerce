@@ -1,7 +1,27 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import { useEffect, useState } from "react";
+import axiosSecure from "../auth/axiosSecure";
 
 const ShopCategoris = () => {
+  const [watchCounts, setWatchCounts] = useState(0);
+  const [clockCounts, setClockCounts] = useState(0);
+  const [fanCounts, setFanCounts] = useState(0);
+
+  useEffect(()=>{
+    const fetchCounts = async()=>{
+      try {
+        await axiosSecure.get("/products?category=watch").then(res=>setWatchCounts(res.data.length))
+        await axiosSecure.get("/products?category=clock").then(res=>setClockCounts(res.data.length))
+        await axiosSecure.get("/products?category=fan").then(res=>setFanCounts(res.data.length))
+      } catch (error) {
+        console.error("Error fetching product counts:", error);
+      }
+    }
+    fetchCounts()
+  },[])
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <div>
@@ -20,7 +40,7 @@ const ShopCategoris = () => {
               className="w-full h-60 object-cover rounded-t-lg mb-6"
             />
             <h1 className="text-lg font-semibold px-3">Wrist Watches</h1>
-            <p className="text-gray-600 px-3 text-sm">7 Items</p>
+            <p className="text-gray-600 px-3 text-sm">{watchCounts} Items</p>
           </div>
         </Link>
 
@@ -32,7 +52,7 @@ const ShopCategoris = () => {
               className="w-full h-60 object-cover rounded-t-lg mb-6"
             />
             <h1 className="text-lg font-semibold px-3">Luxury Clocks</h1>
-            <p className="text-gray-600 px-3 text-sm">3 Items</p>
+            <p className="text-gray-600 px-3 text-sm">{clockCounts} Items</p>
           </div>
         </Link>
 
@@ -44,7 +64,7 @@ const ShopCategoris = () => {
               className="w-full h-60 object-cover rounded-t-lg mb-6"
             />
             <h1 className="text-lg font-semibold px-3">Cooling Fan</h1>
-            <p className="text-gray-600 px-3 text-sm">4 Items</p>
+            <p className="text-gray-600 px-3 text-sm">{fanCounts} Items</p>
           </div>
         </Link>
 
