@@ -110,6 +110,11 @@ export default function DashboardLayout({
           </Link>
           {user?.role === "admin" && (
             <div className="space-y-2">
+              <Link href="/admin/AllProducts" className="block" onClick={closeMobileMenu}>
+                <li className="rounded-md p-3 text-sm transition-colors hover:bg-gray-100 hover:text-blue-500 sm:text-base">
+                  All Products
+                </li>
+              </Link>
               <Link href="/admin/AddProduct" className="block" onClick={closeMobileMenu}>
                 <li className="rounded-md p-3 text-sm transition-colors hover:bg-gray-100 hover:text-blue-500 sm:text-base">
                   Add Product
