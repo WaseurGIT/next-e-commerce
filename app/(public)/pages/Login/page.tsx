@@ -58,7 +58,7 @@ const Page = () => {
         <div className="relative hidden md:flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-800 to-slate-900">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 blur-2xl opacity-20"></div>
           <img
-            src="/images/login.png"
+            src="https://i.ibb.co.com/ynh4h07B/login.png"
             alt="Login"
             className="relative w-full h-full object-cover hover:scale-110 transition-transform duration-500"
           />

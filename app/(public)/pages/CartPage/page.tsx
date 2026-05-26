@@ -1,9 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Trash2, ShoppingBag, Minus, Plus, CreditCard, Smartphone } from "lucide-react";
+import {
+  Trash2,
+  ShoppingBag,
+  Minus,
+  Plus,
+  CreditCard,
+  Smartphone,
+} from "lucide-react";
 import Link from "next/link";
+import axiosSecure from "@/app/auth/axiosSecure";
 
 interface CartItem {
   _id: string;
@@ -19,7 +26,6 @@ const Page = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-  const [userId, setUserId] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [cardData, setCardData] = useState({
     cardNumber: "",
@@ -28,39 +34,31 @@ const Page = () => {
   });
 
   useEffect(() => {
-    // Get userId from localStorage
-    const storedUserId = localStorage.getItem("userId") || "123";
-    setUserId(storedUserId);
+    const loadCart = async () => {
+      try {
+        setLoading(true);
+
+        const res = await axiosSecure.get("/carts");
+        const data: CartItem[] = res.data;
+        setCartItems(data);
+        const quantitiesMap: { [key: string]: number } = {};
+        for (const item of data) {
+          quantitiesMap[item._id] = item.quantity || 1;
+        }
+        setQuantities(quantitiesMap);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCart();
   }, []);
-
-  useEffect(() => {
-    if (userId) {
-      fetchCartItems();
-    }
-  }, [userId]);
-
-  const fetchCartItems = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`http://localhost:5000/carts/${userId}`);
-      setCartItems(response.data);
-
-      const quantitiesMap: { [key: string]: number } = {};
-      response.data.forEach((item: CartItem) => {
-        quantitiesMap[item._id] = item.quantity || 1;
-      });
-      setQuantities(quantitiesMap);
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const removeItem = async (itemId: string) => {
     try {
-      // Call your delete endpoint
-      await axios.delete(`http://localhost:5000/carts/${itemId}`);
+      await axiosSecure.delete(`/carts/${itemId}`);
       setCartItems(cartItems.filter((item) => item._id !== itemId));
       const newQuantities = { ...quantities };
       delete newQuantities[itemId];
@@ -74,8 +72,8 @@ const Page = () => {
     if (newQuantity < 1) return;
     setQuantities({ ...quantities, [itemId]: newQuantity });
 
-    axios
-      .patch(`http://localhost:5000/carts/${itemId}`, { quantity: newQuantity })
+    axiosSecure
+      .patch(`/carts/${itemId}`, { quantity: newQuantity })
       .catch((error) => console.error("Error updating quantity:", error));
   };
 

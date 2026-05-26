@@ -1,7 +1,6 @@
 const Banner = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 flex items-center justify-around px-6 md:px-12 lg:px-20 py-2 overflow-hidden relative">
-      {/* Content */}
       <div className="text-white max-w-xl space-y-8 relative z-10">
         <div>
           <span className="inline-block text-md font-bold text-[#4D8EFF] bg-opacity-20 rounded-full mb-4">
@@ -34,7 +33,7 @@ const Banner = () => {
         <div className="relative h-full flex items-center">
           <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-xl opacity-30"></div>
           <img
-            src="/images/banner.png"
+            src="https://i.ibb.co.com/sJbfDXs1/banner.png"
             alt="Luxury Watch"
             className="relative h-[600px] w-auto object-cover rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500"
           />

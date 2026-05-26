@@ -215,7 +215,7 @@ const Page = () => {
       {/* RIGHT - IMAGE */}
       <div className="hidden md:flex relative items-center justify-center overflow-hidden">
         <img
-          src="/images/register.png"
+          src="https://i.ibb.co.com/RTvYNCwj/register.png"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60"></div>

@@ -1,7 +1,9 @@
+import axiosSecure from "../auth/axiosSecure";
+
 const getWatches = async () => {
   try {
-    const response = await fetch("http://localhost:5000/watches");
-    const data = await response.json();
+    const response = await axiosSecure.get("/products?category=watch");
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching watches:", error);
@@ -11,8 +13,8 @@ const getWatches = async () => {
 
 const getWatchesById = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:5000/watches/${id}`);
-    const data = await response.json();
+    const response = await axiosSecure.get(`/products/${id}`);
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching watch by ID:", error);
@@ -22,8 +24,8 @@ const getWatchesById = async (id: string) => {
 
 const getFans = async () => {
   try {
-    const response = await fetch("http://localhost:5000/fans");
-    const data = await response.json();
+    const response = await axiosSecure.get("/products?category=fan");
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching fans:", error);
@@ -33,8 +35,8 @@ const getFans = async () => {
 
 const getFansById = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:5000/fans/${id}`);
-    const data = await response.json();
+    const response = await axiosSecure.get(`/products/${id}`);
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching fan by ID:", error);
@@ -44,8 +46,8 @@ const getFansById = async (id: string) => {
 
 const getClocks = async () => {
   try {
-    const response = await fetch("http://localhost:5000/clocks");
-    const data = await response.json();
+    const response = await axiosSecure.get("/products?category=clock");
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching clocks:", error);
@@ -55,8 +57,8 @@ const getClocks = async () => {
 
 const getClocksById = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:5000/clocks/${id}`);
-    const data = await response.json();
+    const response = await axiosSecure.get(`/products/${id}`);
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching clock by ID:", error);
@@ -66,8 +68,8 @@ const getClocksById = async (id: string) => {
 
 const getTrendings = async () => {
   try {
-    const response = await fetch("http://localhost:5000/trendings");
-    const data = await response.json();
+    const response = await axiosSecure.get("/products?category=trending");
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching trending products:", error);
@@ -77,8 +79,8 @@ const getTrendings = async () => {
 
 const getTrendingById = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:5000/trendings/${id}`);
-    const data = await response.json();
+    const response = await axiosSecure.get(`/products/${id}`);
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error("Error fetching trending product by ID:", error);

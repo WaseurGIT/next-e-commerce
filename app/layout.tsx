@@ -1,6 +1,13 @@
 import AuthProvider from "./auth/AuthProvider";
 import "./globals.css";
 
+
+export const metadata = {
+  title: "LUXURA",
+  description: "Premium Luxury Products for Discerning Tastes",
+};
+
+
 export default function RootLayout({
   children,
 }: Readonly<{

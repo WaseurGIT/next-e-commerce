@@ -6,6 +6,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
+import axiosSecure from "@/app/auth/axiosSecure";
+import { useAuth } from "@/app/auth/AuthProvider";
 
 interface Fans {
   _id: string;
@@ -16,14 +18,15 @@ interface Fans {
 }
 
 const Page = () => {
+  const { user } = useAuth();
   const [fans, setFans] = useState<Fans[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/fans");
-        const data = await response.json();
+        const response = await axiosSecure.get("/fans");
+        const data = await response.data;
         setFans(data);
       } catch (error) {
         console.error("Error fetching fans:", error);
@@ -54,9 +57,7 @@ const Page = () => {
                   <div className="inline-block">
                     <div className="w-12 h-12 border-4 border-[#2573E6] border-t-transparent rounded-full animate-spin"></div>
                   </div>
-                  <p className="text-gray-600 mt-4">
-                    Loading premium fans...
-                  </p>
+                  <p className="text-gray-600 mt-4">Loading premium fans...</p>
                 </div>
               </div>
             ) : (
@@ -85,12 +86,18 @@ const Page = () => {
                           ${fan.price.toLocaleString()}
                         </span>
                       </div>
-                      <Link href={`/pages/ProductDetailsPage?id=${fan._id}&type=fans`}>
-                        <button className="border mt-2 w-full text-[#2573E6] font-semibold py-2 sm:py-2 px-2 sm:px-2 rounded-lg text-sm sm:text-base active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg">
-                          <FaShoppingCart className="text-base sm:text-lg" />
-                          Add to Cart
-                        </button>
-                      </Link>
+                      {user ? (
+                        <Link
+                          href={`/pages/ProductDetailsPage?id=${fan._id}&type=fans`}
+                        >
+                          <button className="border mt-2 w-full text-[#2573E6] font-semibold py-2 sm:py-2 px-2 sm:px-2 rounded-lg text-sm sm:text-base active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg">
+                            <FaShoppingCart className="text-base sm:text-lg" />
+                            Add to Cart
+                          </button>
+                        </Link>
+                      ) : (
+                        <Link href="/login"></Link>
+                      )}
                     </div>
                   </div>
                 ))}

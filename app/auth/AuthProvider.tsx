@@ -61,10 +61,16 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await axiosSecure.post("/login", {
-        email,
-        password,
-      });
+      const res = await axiosSecure.post(
+        "/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
 
       if (res.data.success) {
         return await fetchUser();

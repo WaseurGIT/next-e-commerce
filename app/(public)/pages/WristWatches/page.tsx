@@ -7,6 +7,7 @@ import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import { getWatches } from "@/app/api/productsApi";
+import { useAuth } from "@/app/auth/AuthProvider";
 
 interface Watch {
   _id: string;
@@ -17,6 +18,7 @@ interface Watch {
 }
 
 const Page = () => {
+  const { user } = useAuth();
   const [watches, setWatches] = useState<Watch[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -85,12 +87,18 @@ const Page = () => {
                           ${watch.price.toLocaleString()}
                         </span>
                       </div>
-                      <Link href={`/pages/ProductDetailsPage?id=${watch._id}&type=watches`}>
-                        <button className="border mt-2 w-full text-[#2573E6] font-semibold py-2 sm:py-2 px-2 sm:px-2 rounded-lg text-sm sm:text-base active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg">
-                          <FaShoppingCart className="text-base sm:text-lg" />
-                          Add to Cart
-                        </button>
-                      </Link>
+                      {user ? (
+                        <Link
+                          href={`/pages/ProductDetailsPage?id=${watch._id}&type=watches`}
+                        >
+                          <button className="border mt-2 w-full text-[#2573E6] font-semibold py-2 sm:py-2 px-2 sm:px-2 rounded-lg text-sm sm:text-base active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg">
+                            <FaShoppingCart className="text-base sm:text-lg" />
+                            Add to Cart
+                          </button>
+                        </Link>
+                      ) : (
+                        <Link href="/login"></Link>
+                      )}
                     </div>
                   </div>
                 ))}

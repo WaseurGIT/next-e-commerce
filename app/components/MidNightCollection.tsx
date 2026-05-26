@@ -1,7 +1,13 @@
+"use client"
+
+
 import React from "react";
 import { ShoppingBag } from "lucide-react";
+import Link from "next/link";
+import { useAuth } from "../auth/AuthProvider";
 
 const MidNightCollection = () => {
+  const {user} = useAuth()
   const timerBlocks = [
     { value: "04", label: "Hours" },
     { value: "22", label: "Minutes" },
@@ -46,7 +52,7 @@ const MidNightCollection = () => {
             <div className="relative bg-white rounded-xl sm:rounded-2xl shadow-lg w-full sm:max-w-sm md:max-w-md p-4 sm:p-6">
               <div className="flex flex-col items-center">
                 <img
-                  src="/images/watch_4.png"
+                  src="https://i.ibb.co.com/fYfDDbCR/watch-4.png"
                   alt="Midnight Collection"
                   className="w-40 sm:w-48 h-40 sm:h-48 object-cover rounded-lg mb-4 sm:mb-6"
                 />
@@ -66,10 +72,10 @@ const MidNightCollection = () => {
                 </p>
               </div>
               
-              <button className="w-full bg-black text-white py-2.5 sm:py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors duration-200 text-sm sm:text-base font-medium">
+              {user? <button className="w-full bg-black text-white py-2.5 sm:py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors duration-200 text-sm sm:text-base font-medium">
                 <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
                 Add to Cart
-              </button>
+              </button> : <Link href="/login"></Link>}
             </div>
           </div>
 

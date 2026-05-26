@@ -15,7 +15,7 @@ const ShopCategoris = () => {
         <Link href="/pages/WristWatches">
           <div className="flex flex-col bg-white rounded-lg shadow-md pb-4">
             <img
-              src="/images/watch_1.png"
+              src="https://i.ibb.co.com/C3bgdrSY/watch-1.png"
               alt="Shop Categories"
               className="w-full h-60 object-cover rounded-t-lg mb-6"
             />
@@ -27,7 +27,7 @@ const ShopCategoris = () => {
         <Link href="/pages/LuxuryClocks">
           <div className="flex flex-col bg-white rounded-lg shadow-md pb-4">
             <img
-              src="/images/watch_2.png"
+              src="https://i.ibb.co.com/xKxgndMm/watch-2.png"
               alt="Shop Categories"
               className="w-full h-60 object-cover rounded-t-lg mb-6"
             />
@@ -39,7 +39,7 @@ const ShopCategoris = () => {
         <Link href="/pages/Fans">
           <div className="flex flex-col bg-white rounded-lg shadow-md pb-4">
             <img
-              src="/images/fan_1.png"
+              src="https://i.ibb.co.com/b4qnvVn/fan-1.png"
               alt="Shop Categories"
               className="w-full h-60 object-cover rounded-t-lg mb-6"
             />

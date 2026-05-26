@@ -76,7 +76,7 @@ const Navbar = () => {
                 href="/pages/CartPage"
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors relative flex items-center justify-center"
               >
-                <SlBag className="text-gray-700 text-lg sm:text-xl" />
+                <SlBag className="text-gray-900 text-lg sm:text-xl" />
               </Link>
 
               <button

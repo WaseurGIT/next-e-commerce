@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../auth/AuthProvider";
+import axiosSecure from "../auth/axiosSecure";
 
 interface TrendingProducts {
-  _id:string
+  _id: string;
   name: string;
   price: string;
   image: string;
@@ -12,20 +14,24 @@ interface TrendingProducts {
 }
 
 const Trending = () => {
+  const { user } = useAuth();
 
-  const [trendingProducts, setTrendingProducts] = useState<TrendingProducts[]>([]);
-  useEffect(()=>{
+  const [trendingProducts, setTrendingProducts] = useState<TrendingProducts[]>(
+    [],
+  );
+  useEffect(() => {
     const fetchTrendingProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/trendings");
-        const data = await response.json();
+        const response = await axiosSecure.get("/products?category=trending");
+        const data = await response.data;
+
         setTrendingProducts(data);
       } catch (error) {
         console.error("Error fetching trending products:", error);
       }
     };
     fetchTrendingProducts();
-  },[])
+  }, []);
 
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
@@ -59,10 +65,17 @@ const Trending = () => {
                 </p>
               </div>
 
-              <Link href={`/pages/ProductDetailsPage?id=${product._id}&type=trendings`}>
-              <button className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 border border-gray-300 py-2 sm:py-2.5 rounded-md text-sm sm:text-base font-medium hover:bg-gray-50 transition-colors duration-200">
-                Quick Add
-              </button></Link>
+              {user ? (
+                <Link
+                  href={`/pages/ProductDetailsPage?id=${product._id}&type=trendings`}
+                >
+                  <button className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 border border-gray-300 py-2 sm:py-2.5 rounded-md text-sm sm:text-base font-medium hover:bg-gray-50 transition-colors duration-200">
+                    Quick Add
+                  </button>
+                </Link>
+              ) : (
+                <Link href="/login"></Link>
+              )}
             </div>
           ))}
         </div>
