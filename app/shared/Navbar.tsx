@@ -7,14 +7,32 @@ import { SlBag } from "react-icons/sl";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/app/auth/AuthProvider";
 import Swal from "sweetalert2";
+import axiosSecure from "../auth/axiosSecure";
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
+
+  const [cartsItemCount, setCartsItemCount] = useState(0);
+  useEffect(() => {
+    // if (!user) return;
+    const fetchCartCount = async () => {
+      try {
+        const response = await axiosSecure.get("/carts");
+
+        const items = response.data || [];
+        setCartsItemCount(items.length);
+      } catch (error) {
+        console.error("Cart fetch error:", error);
+      }
+    };
+
+    fetchCartCount();
+  }, []);
 
   return (
     <nav className="w-full h-16 fixed z-20 top-0 text-black bg-white shadow-md">
@@ -77,6 +95,9 @@ const Navbar = () => {
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors relative flex items-center justify-center"
               >
                 <SlBag className="text-gray-900 text-lg sm:text-xl" />
+                <p className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartsItemCount}
+                </p>
               </Link>
 
               <button

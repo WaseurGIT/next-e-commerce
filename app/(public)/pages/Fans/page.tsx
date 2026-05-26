@@ -25,7 +25,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosSecure.get("/fans");
+        const response = await axiosSecure.get("/products?category=fan");
         const data = await response.data;
         setFans(data);
       } catch (error) {

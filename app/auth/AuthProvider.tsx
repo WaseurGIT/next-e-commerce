@@ -46,6 +46,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(res.data);
       return res.data;
     } catch (error) {
+      console.error("fetch user error", error);
       setUser(null);
       return null;
     } finally {
@@ -54,9 +55,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    (async () => {
-      await fetchUser();
-    })();
+    const init = async () => {
+      try {
+        await fetchUser();
+      } catch {
+        setUser(null);
+      }
+    };
+    init();
   }, []);
 
   const login = async (email: string, password: string) => {

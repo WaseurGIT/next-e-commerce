@@ -7,6 +7,7 @@ import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/app/auth/AuthProvider";
+import axiosSecure from "@/app/auth/axiosSecure";
 
 interface Clocks {
   _id: string;
@@ -24,8 +25,8 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/clocks");
-        const data = await response.json();
+        const response = await axiosSecure.get("/products?category=clock");
+        const data = await response.data;
         setClocks(data);
       } catch (error) {
         console.error("Error fetching clocks:", error);

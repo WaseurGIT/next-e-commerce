@@ -77,27 +77,20 @@ export default function DashboardLayout({
               Dashboard
             </li>
           </Link>
-          <Link href="/" className="">
-            <li className="p-2 rounded-md hover:text-blue-500 hover:underline">
-              Manage Wrist Watches
-            </li>
-          </Link>
-          <Link href="/" className="">
-            <li className="p-2 rounded-md hover:text-blue-500 hover:underline">
-              Manage Clocks
-            </li>
-          </Link>
-          <Link href="/" className="">
-            <li className="p-2 rounded-md hover:text-blue-500 hover:underline">
-              Manage Fans
-            </li>
-          </Link>
-          <Link href="/" className="">
-            <li className="p-2 rounded-md hover:text-blue-500 hover:underline">
-              All Users
-            </li>
-          </Link>
-          
+          {user?.role === "admin" && (
+            <div>
+              <Link href="/" className="">
+                <li className="p-2 rounded-md hover:text-blue-500 hover:underline">
+                  Add Product
+                </li>
+              </Link>
+              <Link href="/" className="">
+                <li className="p-2 rounded-md hover:text-blue-500 hover:underline">
+                  All Users
+                </li>
+              </Link>
+            </div>
+          )}
 
           <button
             onClick={handleLogOut}
