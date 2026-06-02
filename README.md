@@ -1,3 +1,10 @@
+I tried to make this E Commerce Web Site with Next JS, Typescript. I want to explore Next JS and Typescript so I try to make this web site. The most challenging part was authentication, I have made manuall login authentication in this project and used Firebase for Google Login System. By doing this project I have gathered the basics of Next JS and Typescript. 
+
+In the backend I have used Node JS framework Express JS, for database I have used MongoDB. I have used Jsonwebtoken (JWT) in login authentication which would be save on the cookie after user login.
+
+There are role based authentication for both admin and user. Both admin and user would be redirect to the dasboard after login. Both have a dashboard with nice UI design. Admin can add new, update and delete products. In the admin dashboard admin able to monitor everything about this site. In user dashboard would be able to see the cart items they have ordered. 
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
