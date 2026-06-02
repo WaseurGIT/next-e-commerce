@@ -85,7 +85,11 @@ export default function DashboardLayout({
             aria-label="Toggle dashboard menu"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
+            {mobileMenuOpen ? (
+              <FiX className="text-xl" />
+            ) : (
+              <FiMenu className="text-xl" />
+            )}
           </button>
         </div>
 
@@ -110,21 +114,59 @@ export default function DashboardLayout({
           </Link>
           {user?.role === "admin" && (
             <div className="space-y-2">
-              <Link href="/admin/AllProducts" className="block" onClick={closeMobileMenu}>
+              <Link
+                href="/admin/AllProducts"
+                className="block"
+                onClick={closeMobileMenu}
+              >
                 <li className="rounded-md p-3 text-sm transition-colors hover:bg-gray-100 hover:text-blue-500 sm:text-base">
                   All Products
                 </li>
               </Link>
-              <Link href="/admin/AddProduct" className="block" onClick={closeMobileMenu}>
+              <Link
+                href="/admin/AddProduct"
+                className="block"
+                onClick={closeMobileMenu}
+              >
                 <li className="rounded-md p-3 text-sm transition-colors hover:bg-gray-100 hover:text-blue-500 sm:text-base">
                   Add Product
                 </li>
               </Link>
-              <Link href="/admin/AllUsers" className="block" onClick={closeMobileMenu}>
+              <Link
+                href="/admin/AllUsers"
+                className="block"
+                onClick={closeMobileMenu}
+              >
                 <li className="rounded-md p-3 text-sm transition-colors hover:bg-gray-100 hover:text-blue-500 sm:text-base">
                   All Users
                 </li>
               </Link>
+            </div>
+          )}
+          {user?.role === "user" && (
+            <div>
+              <div>
+                <Link
+                  href="/user/Profile"
+                  className="block"
+                  onClick={closeMobileMenu}
+                >
+                  <li className="rounded-md p-3 text-sm transition-colors hover:bg-gray-100 hover:text-blue-500 sm:text-base">
+                    Profile
+                  </li>
+                </Link>
+              </div>
+              {/* <div className="space-y-2">
+                <Link
+                  href="/user/MyOrders"
+                  className="block"
+                  onClick={closeMobileMenu}
+                >
+                  <li className="rounded-md p-3 text-sm transition-colors hover:bg-gray-100 hover:text-blue-500 sm:text-base">
+                    My Orders
+                  </li>
+                </Link>
+              </div> */}
             </div>
           )}
 

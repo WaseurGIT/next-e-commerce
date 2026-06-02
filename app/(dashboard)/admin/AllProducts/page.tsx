@@ -37,7 +37,9 @@ const Page = () => {
 
   const stats = useMemo(() => {
     const totalProducts = products.length;
-    const uniqueCategories = new Set(products.map((product) => product.category)).size;
+    const uniqueCategories = new Set(
+      products.map((product) => product.category),
+    ).size;
     const highestPrice = products.reduce((maxPrice, product) => {
       return product.price > maxPrice ? product.price : maxPrice;
     }, 0);
@@ -65,7 +67,9 @@ const Page = () => {
     try {
       setDeletingId(id);
       await axiosSecure.delete(`/products/${id}`);
-      setProducts((currentProducts) => currentProducts.filter((product) => product._id !== id));
+      setProducts((currentProducts) =>
+        currentProducts.filter((product) => product._id !== id),
+      );
 
       await Swal.fire({
         title: "Deleted",
@@ -110,7 +114,8 @@ const Page = () => {
                 All Products
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
-                Manage your catalog in one responsive view with fast delete actions for each product.
+                Manage your catalog in one responsive view with fast delete
+                actions for each product.
               </p>
             </div>
           </div>
@@ -183,7 +188,10 @@ const Page = () => {
                     </thead>
                     <tbody className="divide-y divide-white/10 bg-transparent">
                       {products.map((product) => (
-                        <tr key={product._id} className="transition-colors hover:bg-white/5">
+                        <tr
+                          key={product._id}
+                          className="transition-colors hover:bg-white/5"
+                        >
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-4">
                               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-slate-900">
@@ -210,12 +218,16 @@ const Page = () => {
                           </td>
                           <td className="px-5 py-4">
                             <button
-                              onClick={() => handleDelete(product._id, product.name)}
+                              onClick={() =>
+                                handleDelete(product._id, product.name)
+                              }
                               disabled={deletingId === product._id}
                               className="inline-flex items-center justify-center gap-2 rounded-full border border-red-400/20 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-200 transition-colors hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                             >
                               <FiTrash2 />
-                              {deletingId === product._id ? "Deleting..." : "Delete"}
+                              {deletingId === product._id
+                                ? "Deleting..."
+                                : "Delete"}
                             </button>
                           </td>
                         </tr>
@@ -264,7 +276,9 @@ const Page = () => {
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm font-semibold text-red-200 transition-colors hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         <FiTrash2 />
-                        {deletingId === product._id ? "Deleting..." : "Delete product"}
+                        {deletingId === product._id
+                          ? "Deleting..."
+                          : "Delete product"}
                       </button>
                     </div>
                   </article>

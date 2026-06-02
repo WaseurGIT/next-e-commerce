@@ -43,9 +43,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const res = await axiosSecure.get("/me", {
         withCredentials: true,
       });
+
       setUser(res.data);
       return res.data;
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.response?.status === 401) {
+        setUser(null);
+        return null;
+      }
       console.error("fetch user error", error);
       setUser(null);
       return null;

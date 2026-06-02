@@ -19,20 +19,21 @@ const Navbar = () => {
 
   const [cartsItemCount, setCartsItemCount] = useState(0);
   useEffect(() => {
-    // if (!user) return;
+    if (!user) return;
     const fetchCartCount = async () => {
       try {
         const response = await axiosSecure.get("/carts");
 
         const items = response.data || [];
         setCartsItemCount(items.length);
+        
       } catch (error) {
         console.error("Cart fetch error:", error);
       }
     };
 
     fetchCartCount();
-  }, []);
+  }, [user]);
 
   return (
     <nav className="w-full h-16 fixed z-20 top-0 text-black bg-white shadow-md">
